@@ -35,6 +35,7 @@ In your expense report, what is the product of the three entries that sum to 202
 Your puzzle answer was 261342720.
 
 ## Devnotes
+- I later found out that Dart has a `Set` data structure so the hashmap in the first function could have been replaced with hashset instead. However, runtime performance for both should be the same.
 To run:
 ```dart
 dart run
