@@ -2,6 +2,7 @@
 //
 
 import 'dart:io';
+import 'package:worker_manager/worker_manager.dart';
 
 /// Wraparound a 0-indexed integer [n] of an arbitrary [size] using the
 /// standard modulo algorithm incrementing by [step_size]
@@ -54,31 +55,38 @@ int right_one_down_two(List<String> lines) {
   return right_n_down_m(lines, 1, 2);
 }
 
-void main(List<String> arguments) {
+void main(List<String> arguments) async {
   // int i = 11;
   // i = rollover_13(i);
   // print(i);
   // i = rollover_13(i);
   // print(i);
   //
-  var lines = File('puzzle_input.txt').readAsLinesSync();
+  await Executor().warmUp();
+  var lines = await File('puzzle_input.txt').readAsLines();
 
-  var right_1_down_1_trees = right_one_down_one(lines);
+  var right_1_down_1_trees =
+      await Executor().execute(arg1: lines, fun1: right_one_down_one);
   print('Trees found with right 1 down 1: $right_1_down_1_trees');
 
-  var right_3_down_1_trees = right_three_down_one(lines);
+  var right_3_down_1_trees =
+      await Executor().execute(arg1: lines, fun1: right_three_down_one);
   print('Trees found with right 3 down 1: $right_3_down_1_trees');
 
-  var right_5_down_1_trees = right_five_down_one(lines);
+  var right_5_down_1_trees =
+      await Executor().execute(arg1: lines, fun1: right_five_down_one);
   print('Trees found with right 5 down 1: $right_5_down_1_trees');
 
-  var right_7_down_1_trees = right_seven_down_one(lines);
+  var right_7_down_1_trees =
+      await Executor().execute(arg1: lines, fun1: right_seven_down_one);
   print('Trees found with right 7 down 1: $right_7_down_1_trees');
 
-  var right_1_down_2_trees = right_one_down_two(lines);
+  var right_1_down_2_trees =
+      await Executor().execute(arg1: lines, fun1: right_one_down_two);
   print('Trees found with right 1 down 2: $right_1_down_2_trees');
   // print('Hello world: ${day_three_toboggan_trajectory.calculate()}!');
   //
   print(
       'Product of trees: ${right_1_down_1_trees * right_3_down_1_trees * right_5_down_1_trees * right_7_down_1_trees * right_1_down_2_trees}');
+  exit(0);
 }
