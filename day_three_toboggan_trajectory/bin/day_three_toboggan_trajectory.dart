@@ -35,7 +35,7 @@ void main(List<String> arguments) {
   var trees = 0;
   var lines = File('puzzle_input.txt').readAsLinesSync();
   for (var line in lines) {
-    print(line[counter]);
+   // print(line[counter]);
     if (line[counter] == '#') {
       trees += 1;
     }
